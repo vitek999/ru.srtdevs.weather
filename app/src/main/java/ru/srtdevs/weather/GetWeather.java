@@ -62,7 +62,7 @@ public class GetWeather extends AsyncTask<String,Void,JSONObject> {
             //парсим temp
             JSONObject main = json.getJSONObject("main");
             Log.i(TAG, "main: " + main.toString());
-            Double temp = (double) main.get("temp");
+            double temp = (double) main.get("temp");
             Log.i(TAG, "temp: " + temp);
 
             //заполняем JSON обьект с temp(double) и description(String). (пока так, лучше не придумал XD )
