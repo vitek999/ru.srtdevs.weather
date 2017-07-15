@@ -24,7 +24,7 @@ public class GetWeather extends AsyncTask<String,Void,Void> {
     protected Void doInBackground(String... strings) {
         try{
             //в strings[0] находится название города.
-            String url = "http://api.openweathermap.org/data/2.5/weather?q=" + strings[0] + "&appid=" + Apikey + "&lang=ru";
+            String url = "http://api.openweathermap.org/data/2.5/weather?q=" + strings[0] + "&appid=" + Apikey + "&lang=ru&units=metric";
             URL urlObj = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) urlObj.openConnection();
             connection.setRequestMethod("GET");
