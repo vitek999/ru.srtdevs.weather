@@ -26,7 +26,7 @@ public class GetWeather extends AsyncTask<String,Void,JSONObject> {
 
     @Override
     protected JSONObject doInBackground(String... strings) {
-        //создаём JSON обьект с temp и double. (пока так, лучше не придумал XD )
+        //создаём JSON обьект с temp(double) и description(String). (пока так, лучше не придумал XD )
             JSONObject jsonReturn = new JSONObject();
 
         try{
@@ -65,7 +65,7 @@ public class GetWeather extends AsyncTask<String,Void,JSONObject> {
             Double temp = (double) main.get("temp");
             Log.i(TAG, "temp: " + temp);
 
-            //заполняем JSON обьект с temp и double. (пока так, лучше не придумал XD )
+            //заполняем JSON обьект с temp(double) и description(String). (пока так, лучше не придумал XD )
             jsonReturn.put("temp", temp).put("description", description);
 
         }catch (Throwable cause){
