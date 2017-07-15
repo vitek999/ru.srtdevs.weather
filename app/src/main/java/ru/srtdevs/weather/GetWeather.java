@@ -13,17 +13,22 @@ import java.net.URL;
  * Created by Виктор on 14.07.2017.
  *
  * use: GetWeather().execute("City name")
+ *      при вызове .get() возвращается JSONObject содержащий
+ *      temp(double) и description(String)
  *
  */
 
-public class GetWeather extends AsyncTask<String,Void,Void> {
+public class GetWeather extends AsyncTask<String,Void,JSONObject> {
 
     private final String Apikey = "0336fafc5128270fc1d1c40615db4df4";
 
     private final String TAG = "GetWeather";
 
     @Override
-    protected Void doInBackground(String... strings) {
+    protected JSONObject doInBackground(String... strings) {
+        //создаём JSON обьект с temp и double. (пока так, лучше не придумал XD )
+            JSONObject jsonReturn = new JSONObject();
+
         try{
             //получаем данные от сервера
             //в strings[0] находится название города.
@@ -57,12 +62,17 @@ public class GetWeather extends AsyncTask<String,Void,Void> {
             //парсим temp
             JSONObject main = json.getJSONObject("main");
             Log.i(TAG, "main: " + main.toString());
-            double temp = (double) main.get("temp");
+            Double temp = (double) main.get("temp");
             Log.i(TAG, "temp: " + temp);
-            
+
+            //заполняем JSON обьект с temp и double. (пока так, лучше не придумал XD )
+            jsonReturn.put("temp", temp).put("description", description);
+
         }catch (Throwable cause){
             cause.printStackTrace();
         }
-        return null;
+        Log.i(TAG, "jsonReturn: " + jsonReturn);
+        //возвращаем jsonReturn
+        return jsonReturn;
     }
 }
