@@ -7,14 +7,24 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Виктор on 14.07.2017.
  */
 
 public class MainActivity extends AppCompatActivity {
+
+    ArrayList<String> citys = new ArrayList();
+    ArrayAdapter<String> adapter;
+    ListView cityList;
 
     private final String TAG = "MainActivity";
 
@@ -35,6 +45,24 @@ public class MainActivity extends AppCompatActivity {
             cause.printStackTrace();
         }
         //end test...
+
+
+        citys.add("Test 1");
+        citys.add("Test 2");
+
+        cityList = (ListView) findViewById(R.id.city_list);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, citys);
+        cityList.setAdapter(adapter);
+    }
+
+    public void add_city(View v){
+        EditText cityEdittext = (EditText) findViewById(R.id.city_name);
+        String city = cityEdittext.getText().toString();
+        if(!city.isEmpty() && !citys.contains(city)){
+            adapter.add(city);
+            cityEdittext.setText("");
+            adapter.notifyDataSetChanged();
+        }
     }
 
     //Menu
@@ -44,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
+
     //Обработка нажатий в меню
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -63,3 +92,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+
+
