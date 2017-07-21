@@ -1,9 +1,12 @@
 package ru.srtdevs.weather;
 
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 import org.json.JSONObject;
 
@@ -32,15 +35,30 @@ public class MainActivity extends AppCompatActivity {
             cause.printStackTrace();
         }
         //end test...
-
-
     }
 
     //Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
+
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
+    }
+    //Обработка нажатий в меню
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.about_app:
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("About")
+                        .setMessage("SmartRomTeam");
+                AlertDialog alert = builder.create();
+                alert.show();
+                return true;
+            case R.id.action_settings:
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
