@@ -55,16 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONObject result = getWeather.get();
                     Log.i(TAG, "result: " + result);
-                    //фигня какая-то, потом придумаю как лучше
-                    // TODO: 21.07.2017 : сделать нормально!!!
-                    int temp;
-                    try {
-                        double tmp = (double) result.get("temp");
-                        temp = (int) tmp;
-                    }catch (Throwable cause){
-                        temp = (int) result.get("temp");
-                    }
-
+                    int temp = (int) result.get("temp");
                     String desc = (String) result.get("description");
                     Toast.makeText(getApplicationContext(),"в городе " + selectedCity + " " + desc + " температура: " + temp + " градусов", Toast.LENGTH_SHORT).show();
                 }catch (Throwable cause){
