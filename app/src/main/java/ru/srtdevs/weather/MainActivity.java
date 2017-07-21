@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 alert.show();
                 return true;
             case R.id.action_settings:
+                // TODO: 21.07.2017 сделать активити с настройками
                 return true;
         }
         return super.onOptionsItemSelected(item);
