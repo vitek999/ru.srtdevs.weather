@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        citys.add("Moscow");
+        citys.add("Москва");
 
         cityList = (ListView) findViewById(R.id.city_list);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, citys);
@@ -55,7 +55,16 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONObject result = getWeather.get();
                     Log.i(TAG, "result: " + result);
-                    double temp = (double) result.get("temp");
+                    //фигня какая-то, потом придумаю как лучше
+                    // TODO: 21.07.2017 : сделать нормально!!!
+                    int temp;
+                    try {
+                        double tmp = (double) result.get("temp");
+                        temp = (int) tmp;
+                    }catch (Throwable cause){
+                        temp = (int) result.get("temp");
+                    }
+
                     String desc = (String) result.get("description");
                     Toast.makeText(getApplicationContext(),"в городе " + selectedCity + " " + desc + " температура: " + temp + " градусов", Toast.LENGTH_SHORT).show();
                 }catch (Throwable cause){
