@@ -57,11 +57,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addCity(View v){
-        EditText cityEdittext = (EditText) findViewById(R.id.city_name);
-        String city = cityEdittext.getText().toString();
+        EditText cityEditText = (EditText) findViewById(R.id.city_name);
+        String city = cityEditText.getText().toString();
         if(!city.isEmpty() && !citys.contains(city)){
             adapter.add(city);
-            cityEdittext.setText("");
+            cityEditText.setText("");
             adapter.notifyDataSetChanged();
         }
     }
