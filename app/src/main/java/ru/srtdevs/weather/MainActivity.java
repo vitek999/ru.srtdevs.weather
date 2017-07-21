@@ -3,6 +3,7 @@ package ru.srtdevs.weather;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 
 import org.json.JSONObject;
 
@@ -33,5 +34,13 @@ public class MainActivity extends AppCompatActivity {
         //end test...
 
 
+    }
+
+    //Menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
     }
 }
