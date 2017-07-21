@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -40,20 +41,31 @@ public class MainActivity extends AppCompatActivity {
         cityList = (ListView) findViewById(R.id.city_list);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, citys);
         cityList.setAdapter(adapter);
-    }
 
-    public void getWeatherInfo(String city){
-        //use: GetWeather().execute("City name")
-        //start test...
-        getWeather = new GetWeather();
-        getWeather.execute(city);
-        try {
-            JSONObject result = getWeather.get();
-            Log.i(TAG, "result: " + result);
-        }catch (Throwable cause){
-            cause.printStackTrace();
-        }
-        //end test...
+        cityList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+            {
+                // по позиции получаем выбранный элемент
+                String selectedCity = adapter.getItem(position);
+                //use: GetWeather().execute("City name")
+                //start test...
+                getWeather = new GetWeather();
+                getWeather.execute(selectedCity);
+                try {
+                    JSONObject result = getWeather.get();
+                    Log.i(TAG, "result: " + result);
+                    double temp = (double) result.get("temp");
+                    String desc = (String) result.get("description");
+                    Toast.makeText(getApplicationContext(),"в городе " + selectedCity + " " + desc + " температура: " + temp + " градусов", Toast.LENGTH_SHORT).show();
+                }catch (Throwable cause){
+                    cause.printStackTrace();
+                    Toast.makeText(getApplicationContext(),"Что-то пошло не так..", Toast.LENGTH_SHORT).show();
+                }
+                //end test...
+            }
+        });
+
     }
 
     public void addCity(View v){
