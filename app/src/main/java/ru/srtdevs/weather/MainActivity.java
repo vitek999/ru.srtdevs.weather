@@ -34,18 +34,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //use: GetWeather().execute("City name")
-        //start test...
-        getWeather = new GetWeather();
-        getWeather.execute("kotovo");
-        try {
-            JSONObject result = getWeather.get();
-            Log.i(TAG, "result: " + result);
-        }catch (Throwable cause){
-            cause.printStackTrace();
-        }
-        //end test...
-
 
         citys.add("Test 1");
         citys.add("Test 2");
@@ -55,7 +43,21 @@ public class MainActivity extends AppCompatActivity {
         cityList.setAdapter(adapter);
     }
 
-    public void add_city(View v){
+    public void getWeatherInfo(String city){
+        //use: GetWeather().execute("City name")
+        //start test...
+        getWeather = new GetWeather();
+        getWeather.execute(city);
+        try {
+            JSONObject result = getWeather.get();
+            Log.i(TAG, "result: " + result);
+        }catch (Throwable cause){
+            cause.printStackTrace();
+        }
+        //end test...
+    }
+
+    public void addCity(View v){
         EditText cityEdittext = (EditText) findViewById(R.id.city_name);
         String city = cityEdittext.getText().toString();
         if(!city.isEmpty() && !citys.contains(city)){
