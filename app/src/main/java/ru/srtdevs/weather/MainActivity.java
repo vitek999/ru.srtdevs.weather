@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        citys.add("Test 1");
-        citys.add("Test 2");
+        citys.add("Moscow");
 
         cityList = (ListView) findViewById(R.id.city_list);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, citys);
